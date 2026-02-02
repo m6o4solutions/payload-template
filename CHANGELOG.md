@@ -1,3 +1,10 @@
+# 1.0.0 (2026-02-02)
+
+
+### Features
+
+* **template:** initialize payload CMS starter template ([0e53d50](https://github.com/m6o4solutions/payload-template/commit/0e53d50cde2c8a06bc50b22ca6342018cc5c1733))
+
 ## [1.28.1](https://github.com/m6o4solutions/payload-template-project/compare/v1.28.0...v1.28.1) (2025-12-25)
 
 ### Bug Fixes
