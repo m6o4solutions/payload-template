@@ -443,5 +443,5 @@ Agents.md file takes precedence**.
 
 ### A Note To The Agent
 
-We are building this together. When you learn sonething none obvious, add it to this file
+We are building this together. When you learn something non-obvious, add it to this file
 so that future changes can go faster.
