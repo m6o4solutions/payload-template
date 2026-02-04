@@ -440,3 +440,8 @@ Agents.md file takes precedence**.
 - Do not copy code blindly; adapt it to this repository’s architecture
 
 ---
+
+### Note to Agent
+
+We are building this together. When you learn sonething none obvious, add it to this file
+so that future changes can go faster.
