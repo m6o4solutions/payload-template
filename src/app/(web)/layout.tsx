@@ -1,70 +1,59 @@
 import { ClarityTracker } from "@/components/clarity-tracker";
 import { ThemeProvider } from "@/components/theme-provider";
-import { cn } from "@/lib/utils";
 import { Footer } from "@/payload/blocks/globals/footer/component";
 import { Header } from "@/payload/blocks/globals/header/component";
 import { getServerSideURL } from "@/payload/utilities/get-url";
 import { mergeOpenGraph } from "@/payload/utilities/merge-opengraph";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import { ReactNode } from "react";
 
-// import global styles for the application
+// inject global stylesheets into the web entry point
 import "@/styles/globals.css";
 
-// load the inter font with the 'latin' subset for typography consistency
-const inter = Inter({ subsets: ["latin"] });
-
-// the primary layout component for the entire application, wrapping all pages.
-const RootLayout = async (props: { children: ReactNode }) => {
+// render the public-facing website layout with global navigation and analytics
+const WebLayout = async (props: { children: ReactNode }) => {
 	const { children } = props;
 
 	return (
-		// set html language attribute and suppress hydration warnings for next-themes compatibility
-		<html lang="en" suppressHydrationWarning>
-			{/* apply base styles, flex column layout for full viewport height, and the inter font class */}
-			<body className={cn("flex h-screen flex-col", inter.className)}>
-				{/* track user behavior early in the lifecycle to catch session starts */}
-				<ClarityTracker />
+		<div className="bg-bg-subtle text-text-default flex min-h-screen flex-col font-sans antialiased">
+			{/* initialize user behavior tracking for site analytics */}
+			<ClarityTracker />
 
-				{/* theme provider manages dark/light mode state using the 'class' attribute on the html element */}
-				<ThemeProvider
-					attribute="class"
-					defaultTheme="system"
-					enableSystem // allows the browser/os setting to determine the initial theme
-					disableTransitionOnChange // prevents a visual flash when the theme switches
-				>
-					{/* header component, fetched as a global from Payload CMS */}
-					<header>
-						<Header />
-					</header>
+			{/* wrap content in theme state management to handle light/dark mode transitions */}
+			<ThemeProvider
+				attribute="class"
+				defaultTheme="system"
+				enableSystem
+				disableTransitionOnChange
+			>
+				{/* render global site navigation */}
+				<header>
+					<Header />
+				</header>
 
-					{/* main content area, rendered with the current page */}
-					<main>{children}</main>
+				{/* provide the main content area for page-level rendering */}
+				<main>{children}</main>
 
-					{/* footer component, pinned to the bottom using 'mt-auto' within the flex container */}
-					<footer className="mt-auto">
-						<Footer />
-					</footer>
-				</ThemeProvider>
-			</body>
-		</html>
+				{/* render global site footer pinned to the bottom of the viewport */}
+				<footer className="mt-auto">
+					<Footer />
+				</footer>
+			</ThemeProvider>
+		</div>
 	);
 };
 
-// next.js metadata object for site-wide seo and social sharing configuration.
+// centralize site-wide seo and social graph configurations
 const metadata: Metadata = {
-	// sets the base url for all relative urls in the metadata (e.g., og images)
 	metadataBase: new URL(getServerSideURL()),
-	// merges site-wide open graph defaults (like site name and description)
 	openGraph: mergeOpenGraph(),
 	twitter: {
-		card: "summary_large_image", // ensures a large image display on twitter cards
-		creator: "@m6o4solutions", // explicitly sets the twitter account creator
+		card: "summary_large_image",
+		creator: "@m6o4solutions",
 	},
 	icons: {
 		icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
 	},
 };
 
-export { RootLayout as default, metadata };
+export { WebLayout as default, metadata };
