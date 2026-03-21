@@ -9,7 +9,15 @@ const nextConfig: NextConfig = {
 		remotePatterns: [
 			{
 				protocol: "https",
-				hostname: "**.m6o4solutions.com",
+				hostname: "*.m6o4solutions.com",
+			},
+			{
+				protocol: "https",
+				hostname: "m6o4solutions.com",
+			},
+			{
+				protocol: "https",
+				hostname: "nella-nonexcepting-emil.ngrok-free.dev",
 			},
 			{
 				protocol: "http",

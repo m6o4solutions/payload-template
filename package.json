@@ -5,8 +5,8 @@
 	"license": "MIT",
 	"type": "module",
 	"scripts": {
-		"build": "cross-env NODE_OPTIONS=\"--no-deprecation --max-old-space-size=8192\" next build --webpack",
-		"dev": "cross-env NODE_OPTIONS=--no-deprecation next dev --webpack -H 0.0.0.0",
+		"build": "cross-env NODE_OPTIONS=--no-deprecation next build",
+		"dev": "cross-env NODE_OPTIONS=--no-deprecation next dev -H 0.0.0.0",
 		"generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
 		"generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
 		"lint": "cross-env NODE_OPTIONS=--no-deprecation next lint",
